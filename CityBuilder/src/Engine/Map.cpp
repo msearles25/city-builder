@@ -5,7 +5,8 @@
 #include "Map.h"
 #include "Tile.h"
 
-void Map::load(const std::string& filename, unsigned int width, unsigned int height, std::map<std::string, Tile>& tileAtals)
+void Map::load(const std::string& filename, unsigned int width, 
+	unsigned int height, std::map<std::string, Tile>& tileAtals)
 {
 	std::ifstream inputFile;
 	inputFile.open(filename, std::ios::in | std::ios::binary);
@@ -27,7 +28,7 @@ void Map::load(const std::string& filename, unsigned int width, unsigned int hei
 			m_tiles.push_back(tileAtals.at("grass"));
 			break;
 		case TileType::FOREST:
-			m_tiles.push_back(tileAtals.at("forest"))
+			m_tiles.push_back(tileAtals.at("forest"));
 			break;
 		case TileType::WATER:
 			m_tiles.push_back(tileAtals.at("water"));
@@ -60,6 +61,19 @@ void Map::load(const std::string& filename, unsigned int width, unsigned int hei
 
 void Map::save(const std::string& filename)
 {
+	std::ofstream outputFile;
+	outputFile.open(filename, std::ios::out | std::ios::binary);
+
+	for (auto tile : m_tiles)
+	{
+		outputFile.write((char*)&tile.m_tileType, sizeof(int));
+		outputFile.write((char*)&tile.m_tileVariant, sizeof(int));
+		outputFile.write((char*)&tile.m_regions, sizeof(int) * 1);
+		outputFile.write((char*)&tile.m_population, sizeof(double));
+		outputFile.write((char*)&tile.m_storedGoods, sizeof(float));
+	}
+
+	outputFile.close();
 }
 
 void Map::draw(sf::RenderWindow& window, float dt)
