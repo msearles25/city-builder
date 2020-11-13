@@ -1,11 +1,27 @@
-﻿  GameStateEditor.cpp
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(31,51): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(31,33): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(32,50): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(32,32): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(60,25): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+﻿  Map.cpp
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(10,25): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(11,25): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(45,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(109,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(111,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(115,33): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(116,33): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(130,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(132,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(154,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(156,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(169,10): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(173,10): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(175,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(177,10): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(179,10): warning C4018: '<': signed/unsigned mismatch
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\Map.cpp(179,29): warning C4018: '<': signed/unsigned mismatch
   CityBuilder.vcxproj -> C:\Users\fuck micro$hit\source\repos\CityBuilder\\bin\Win32Debug\CityBuilder.exe

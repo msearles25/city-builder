@@ -51,6 +51,7 @@ void Map::load(const std::string& filename, unsigned int width,
 
 		switch (tileType)
 		{
+		default:
 		case TileType::VOID:
 		case TileType::GRASS:
 			m_tiles.push_back(tileAtals.at("grass"));
@@ -73,8 +74,7 @@ void Map::load(const std::string& filename, unsigned int width,
 		case TileType::ROAD:
 			m_tiles.push_back(tileAtals.at("road"));
 			break;
-		default:
-			break;
+
 		}
 
 		Tile& tile{ m_tiles.back() };
@@ -113,7 +113,7 @@ void Map::draw(sf::RenderWindow& window, float dt)
 			// Set the position of the tile in the world
 			sf::Vector2f pos;
 			pos.x = (x - y) * m_tileSize + m_width * m_tileSize;
-			pos.y = (x + y) * m_tileSize * 0.5f;
+			pos.y = (x + y) * m_tileSize * 0.5;
 			m_tiles[y * m_width + x].m_sprite.setPosition(pos);
 
 			m_tiles[y * m_width + x].draw(window, dt);
@@ -216,7 +216,7 @@ void Map::updateDirection(TileType tileType)
 
 Map::Map()
 {
-	m_tileSize = 0;
+	m_tileSize = 8;
 	m_width = 0;
 	m_height = 0;
 	m_numRegions[0] = 1;
@@ -224,6 +224,6 @@ Map::Map()
 
 Map::Map(const std::string& filename, unsigned int width, unsigned int height, std::map<std::string, Tile>& tileAtlas)
 {
-	m_tileSize = 0;
+	m_tileSize = 8;
 	load(filename, width, height, tileAtlas);
 }
