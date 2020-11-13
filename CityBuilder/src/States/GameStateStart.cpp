@@ -28,9 +28,10 @@ void GameStateStart::handleInput()
 			// Resize the window
 		case sf::Event::Resized:
 			m_view.setSize(event.size.width, event.size.height);
-			m_game->background.setPosition(game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
-			m_game->background.setScale(float(event.size.width) / float(m_game->background.getTexture()->getSize().x));
-			m_game->background.setScale(float(event.size.height) / float(m_game->background.getTexture()->getSize().y));
+			m_game->background.setPosition(m_game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
+			m_game->background.setScale(
+				float(event.size.width) / float(m_game->background.getTexture()->getSize().x),
+				float(event.size.height) / float(m_game->background.getTexture()->getSize().y));
 			break;
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::Escape)
