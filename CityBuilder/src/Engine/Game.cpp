@@ -6,6 +6,40 @@ void Game::loadTexture()
 	textureManager.loadTexture("background", "media/background.png");
 }
 
+void Game::loadTiles()
+{
+	Animation staticAnim(0, 0, 1.0f);
+
+	tileAtlas["grass"] = Tile(tileSize, 1, textureManager.getRef("grass"), 
+		{ staticAnim }, 
+		TileType::GRASS, 50, 0, 1);
+	tileAtlas["forest"] = Tile(tileSize, 1, textureManager.getRef("forest"),
+		{ staticAnim },
+		TileType::FOREST, 100, 0, 1);
+	tileAtlas["water"] = Tile(tileSize, 1, textureManager.getRef("water"),
+		{ Animation(0,3,0.5f),
+		Animation(0,3,0.5f),
+		Animation(0,3,0.5f),
+		Animation(0,3,0.5f) },
+		TileType::WATER, 0, 0, 1);
+	tileAtlas["residential"] = Tile(tileSize, 2, textureManager.getRef("residential"),
+		{ staticAnim,staticAnim,staticAnim,
+		staticAnim,staticAnim,staticAnim },
+		TileType::RESIDENTIAL, 300, 50, 6);
+	tileAtlas["commercial"] = Tile(tileSize, 2, textureManager.getRef("commercial"),
+		{ staticAnim, staticAnim, staticAnim, staticAnim },
+		TileType::COMMERCIAL, 300, 50, 4);
+	tileAtlas["industrial"] = Tile(tileSize, 2, textureManager.getRef("industrial"),
+		{ staticAnim, staticAnim ,staticAnim, staticAnim },
+		TileType::INDUSTRIAL, 300, 50, 4);
+	tileAtlas["road"] = Tile(tileSize, 1, textureManager.getRef("road"),
+		{ staticAnim, staticAnim, staticAnim,
+		staticAnim, staticAnim, staticAnim,
+		staticAnim, staticAnim, staticAnim,
+		staticAnim, staticAnim },
+		TileType::ROAD, 100, 0, 1);
+}
+
 void Game::pushState(GameState* state)
 {
 	states.push(state);
