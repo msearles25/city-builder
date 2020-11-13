@@ -2,6 +2,11 @@
 #include "GameStateEditor.h"
 #include "GameStateStart.h"
 
+void GameStateStart::loadGame()
+{
+	m_game->pushState(new GameStateEditor(m_game));
+}
+
 void GameStateStart::draw(const float dt)
 {
 	m_game->window.setView(m_view);
@@ -36,6 +41,8 @@ void GameStateStart::handleInput()
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::Escape)
 				m_game->window.close();
+			else if (event.key.code == sf::Keyboard::Space)
+				loadGame();
 			break;
 		default:
 			break;
