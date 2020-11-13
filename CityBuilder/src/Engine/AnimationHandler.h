@@ -40,10 +40,11 @@ public:
 	void changeAnim(unsigned int animNum);
 
 	// Current section that should be displayed
-	sf::IntRect bounds;
+	sf::IntRect m_bounds;
 
 	// Pixel dimensions of each frame
-	sf::IntRect frameSize;
+	sf::IntRect m_frameSize;
 
+	AnimationHandler();
 	AnimationHandler(const sf::IntRect& frameSize);
 };
