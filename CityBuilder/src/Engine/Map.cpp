@@ -78,6 +78,19 @@ void Map::save(const std::string& filename)
 
 void Map::draw(sf::RenderWindow& window, float dt)
 {
+	for (int y{ 0 }; y < m_height; ++y)
+	{
+		for (int x{ 0 }; x < m_width; ++x)
+		{
+			// Set the position of the tile in the world
+			sf::Vector2f pos;
+			pos.x = (x - y) * m_tileSize + m_width * m_tileSize;
+			pos.y = (x + y) * m_tileSize * 0.5f;
+			m_tiles[y * m_width + x].m_sprite.setPosition(pos);
+
+			m_tiles[y * m_width + x].draw(window, dt);
+		}
+	}
 }
 
 void Map::findConnectedRegions(std::vector<TileType> whiteList, int type)
@@ -96,7 +109,7 @@ Map::Map()
 	m_numRegions[0] = 1;
 }
 
-Map::Map(const std::string& filename, , unsigned int width, unsigned int height, std::map<std::string, Tile>& tileAtlas)
+Map::Map(const std::string& filename, unsigned int width, unsigned int height, std::map<std::string, Tile>& tileAtlas)
 {
 	m_tileSize = 0;
 	load(filename, width, height, tileAtlas);

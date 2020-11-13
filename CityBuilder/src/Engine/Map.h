@@ -43,6 +43,6 @@ public:
 	void updateDirection(TileType tileType);
 
 	Map();
-	Map(const std::string& filename, , unsigned int width, 
+	Map(const std::string& filename, unsigned int width, 
 		unsigned int height, std::map<std::string, Tile>& tileAtlas);
 };
