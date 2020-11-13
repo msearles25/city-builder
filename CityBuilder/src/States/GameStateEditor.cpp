@@ -3,7 +3,12 @@
 void GameStateEditor::draw(const float dt)
 {
 	m_game->window.clear(sf::Color::Black);
+
+	m_game->window.setView(m_guiView);
 	m_game->window.draw(m_game->background);
+
+	m_game->window.setView(m_gameView);
+	map.draw(m_game->window, dt);
 }
 
 void GameStateEditor::update(const float dt)
@@ -49,4 +54,10 @@ GameStateEditor::GameStateEditor(Game* game)
 
 	m_guiView.setCenter(pos);
 	m_gameView.setCenter(pos);
+
+	map = Map("city_map.dat", 64, 64, game->tileAtlas);
+
+	sf::Vector2f center(map.m_width, map.m_height * 0.5f);
+	center *= float(map.m_tileSize);
+	m_gameView.setCenter(center);
 }

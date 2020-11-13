@@ -1,0 +1,11 @@
+﻿  GameStateEditor.cpp
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(31,51): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(31,33): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(32,50): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(32,32): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateEditor.cpp(60,25): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  CityBuilder.vcxproj -> C:\Users\fuck micro$hit\source\repos\CityBuilder\\bin\Win32Debug\CityBuilder.exe

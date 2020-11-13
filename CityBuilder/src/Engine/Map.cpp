@@ -5,7 +5,7 @@
 #include "Map.h"
 #include "Tile.h"
 
-void Map::depthFirstSearch(std::vector<TileType>& whiteList, sf::Vector2i pos, int label, int regionType = 0)
+void Map::depthFirstSearch(std::vector<TileType>& whiteList, sf::Vector2i pos, int label, int regionType)
 {
 	if (pos.x < 0 || pos.x >= m_width) return;
 	if (pos.y < 0 || pos.y >= m_height) return;
@@ -155,7 +155,7 @@ void Map::updateDirection(TileType tileType)
 	{
 		for (int x{ 0 }; x < m_width; ++x)
 		{
-			int pos{ y * m_width + x };
+			int pos{ int(y * m_width + x) };
 
 			if (m_tiles[pos].m_tileType != tileType) continue;
 
