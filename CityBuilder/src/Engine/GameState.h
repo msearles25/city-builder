@@ -5,7 +5,7 @@
 class GameState
 {
 public:
-	Game* game;
+	Game* m_game;
 
 	virtual void draw(const float dt) = 0;
 	virtual void update(const float dt) = 0;
