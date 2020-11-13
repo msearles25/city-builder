@@ -145,19 +145,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Map.cpp" />
+    <ClCompile Include="src\Engine\AnimationHandler.cpp" />
     <ClCompile Include="src\States\GameStateEditor.cpp" />
     <ClCompile Include="src\States\GameStateStart.cpp" />
     <ClCompile Include="src\Engine\Game.cpp" />
     <ClCompile Include="src\Engine\GameState.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Engine\TextureManager.cpp" />
+    <ClCompile Include="src\Engine\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Map.h" />
+    <ClInclude Include="src\Engine\AnimationHandler.h" />
     <ClInclude Include="src\States\GameStateEditor.h" />
     <ClInclude Include="src\States\GameStateStart.h" />
     <ClInclude Include="src\Engine\Game.h" />
     <ClInclude Include="src\Engine\GameState.h" />
     <ClInclude Include="src\Engine\TextureManager.h" />
+    <ClInclude Include="src\Engine\Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

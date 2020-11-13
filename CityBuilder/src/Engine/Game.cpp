@@ -97,6 +97,7 @@ void Game::gameLoop()
 Game::Game()
 {
 	loadTexture();
+	loadTiles();
 
 	window.create(sf::VideoMode(800, 600), "City Builder");
 	window.setFramerateLimit(60);
