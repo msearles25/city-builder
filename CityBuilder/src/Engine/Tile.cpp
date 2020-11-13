@@ -45,6 +45,18 @@ void Tile::draw(sf::RenderWindow& window, float dt)
 
 void Tile::update()
 {
+	/*
+	If the pop is at the max value for a tile, there is a small chance that
+	the tile will increase its building stage
+	*/
+	if ((m_tileType == TileType::RESIDENTIAL ||
+		m_tileType == TileType::COMMERCIAL ||
+		m_tileType == TileType::INDUSTRIAL &&
+		m_population == m_maxPopPerLevel * (m_tileVariant + 1) &&
+		m_tileVariant < m_maxLevels))
+	{
+		if (rand() * int(1e4) < 1e2 / (m_tileVariant + 1)) ++m_tileVariant;
+	}
 }
 
 std::string Tile::getCost()
