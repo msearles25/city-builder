@@ -64,3 +64,18 @@ std::string Tile::getCost()
 	// Return aa string that contains the cost of the tile
 	return std::to_string(m_cost);
 }
+
+std::string tileTypeToStr(TileType type)
+{
+	switch (type)
+	{
+	default:
+	case TileType::VOID: return "Void";
+	case TileType::GRASS: return "Flatten";
+	case TileType::FOREST: return "Forest";
+	case TileType::WATER: return "Water";
+	case TileType::RESIDENTIAL: return "Residential Zone";
+	case TileType::COMMERCIAL: return "Commercial Zone";
+	case TileType::INDUSTRIAL: return "Industrial Zone";
+	}
+}
