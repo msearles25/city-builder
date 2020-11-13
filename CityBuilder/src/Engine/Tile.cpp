@@ -32,6 +32,21 @@ Tile::Tile(const unsigned int tileSize, const unsigned int height,
 	m_animHandler.update(0.f);
 }
 
+void Tile::draw(sf::RenderWindow& window, float dt)
+{
+	// Change the sprite to reflect its variant type
+	m_animHandler.changeAnim(m_tileVariant);
+	// update the anims
+	m_animHandler.update(dt);
+	// update the sprite
+	m_sprite.setTextureRect(m_animHandler.m_bounds);
+	window.draw(m_sprite);
+}
+
+void Tile::update()
+{
+}
+
 std::string Tile::getCost()
 {
 	// Return aa string that contains the cost of the tile
