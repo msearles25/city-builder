@@ -1,8 +1,17 @@
+#include "AnimationHandler.h"
 #include "Game.h"
 #include "GameState.h"
 
 void Game::loadTexture()
 {
+	textureManager.loadTexture("grass", "media/grass.png");
+	textureManager.loadTexture("forest", "media/forest.png");
+	textureManager.loadTexture("water", "media/water.png");
+	textureManager.loadTexture("residential", "media/residential.png");
+	textureManager.loadTexture("commercial", "media/commercial.png");
+	textureManager.loadTexture("industrial", "media/industrial.png");
+	textureManager.loadTexture("road", "media/road.png");
+
 	textureManager.loadTexture("background", "media/background.png");
 }
 
