@@ -1,4 +1,10 @@
 #include "Game.h"
+#include "GameState.h"
+
+void Game::loadTexture()
+{
+	textureManager.loadTexture("background", "media/background.png");
+}
 
 void Game::pushState(GameState* state)
 {
@@ -23,7 +29,7 @@ GameState* Game::peekState()
 {
 	if (states.empty()) return nullptr;
 
-	states.top();
+	return states.top();
 }
 
 void Game::gameLoop()
@@ -47,8 +53,12 @@ void Game::gameLoop()
 
 Game::Game()
 {
+	loadTexture();
+
 	window.create(sf::VideoMode(800, 600), "City Builder");
 	window.setFramerateLimit(60);
+
+	background.setTexture(textureManager.getRef("background"));
 }
 
 Game::~Game()

@@ -89,6 +89,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\libs\SFML-2.5.1\include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,12 +150,14 @@
     <ClCompile Include="src\Engine\Game.cpp" />
     <ClCompile Include="src\Engine\GameState.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Engine\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\States\GameStateEditor.h" />
     <ClInclude Include="src\States\GameStateStart.h" />
     <ClInclude Include="src\Engine\Game.h" />
     <ClInclude Include="src\Engine\GameState.h" />
+    <ClInclude Include="src\Engine\TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

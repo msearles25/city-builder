@@ -3,7 +3,7 @@
 void GameStateEditor::draw(const float dt)
 {
 	m_game->window.clear(sf::Color::Black);
-	m_game->window.draw(background);
+	m_game->window.draw(m_game->background);
 }
 
 void GameStateEditor::update(const float dt)
@@ -25,10 +25,10 @@ void GameStateEditor::handleInput()
 		case sf::Event::Resized:
 			m_gameView.setSize(event.size.width, event.size.height);
 			m_guiView.setSize(event.size.width, event.size.height);
-			m_game->background.setPosition(m_game->window.mapCoordsToPixel(sf::Vector2f(0, 0), m_guiView));
+			m_game->background.setPosition(m_game->window.mapPixelToCoords(sf::Vector2i(0, 0), m_guiView));
 			m_game->background.setScale(
-				float(event.size.width) / float(m_game->background.getTexture->getSize().x),
-				float(event.size.height) / float(m_game->background.getTexture->getSize().y));
+				float(event.size.width) / float(m_game->background.getTexture()->getSize().x),
+				float(event.size.height) / float(m_game->background.getTexture()->getSize().y));
 			break;
 		default:
 			break;

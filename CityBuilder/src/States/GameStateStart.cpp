@@ -38,6 +38,7 @@ void GameStateStart::handleInput()
 				float(event.size.width) / float(m_game->background.getTexture()->getSize().x),
 				float(event.size.height) / float(m_game->background.getTexture()->getSize().y));
 			break;
+			// Check if key is pressed
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::Escape)
 				m_game->window.close();
