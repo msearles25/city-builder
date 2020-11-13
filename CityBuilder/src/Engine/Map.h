@@ -35,7 +35,7 @@ public:
 	/*
 	Checks if one position is in the map is connected to another by only traversing tiles in the whitelist
 	*/
-	void findConnectedRegions(std::vector<TileType> whiteList, int type);
+	void findConnectedRegions(std::vector<TileType> whiteList, int regionType);
 
 	/*
 	Update the direction of the directional tiles so they face the correct way. Roads, pylons, rivers etc

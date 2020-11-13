@@ -121,8 +121,32 @@ void Map::draw(sf::RenderWindow& window, float dt)
 	}
 }
 
-void Map::findConnectedRegions(std::vector<TileType> whiteList, int type)
+void Map::findConnectedRegions(std::vector<TileType> whiteList, int regionType)
 {
+	int regions{ 1 };
+
+	for (auto& tile : m_tiles) tile.m_regions[regionType] = 0;
+
+	for (int y{ 0 }; y < m_height; ++y)
+	{
+		for (int x{ 0 }; x < m_width; ++x)
+		{
+			bool found{ false };
+			for (auto type : whiteList)
+			{
+				if (type == m_tiles[y * m_width + x].m_tileType)
+				{
+					found = true;
+					break;
+				}
+			}
+			if (m_tiles[y * m_width + x].m_regions[regionType] == 0 && found)
+			{
+				depthFirstSearch(whiteList, sf::Vector2i(x, y), regions++, regionType);
+			}
+		}
+	}
+	m_numRegions[regionType] = regions;
 }
 
 void Map::updateDirection(TileType tileType)
