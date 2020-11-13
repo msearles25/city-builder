@@ -5,7 +5,35 @@
 #include "Map.h"
 #include "Tile.h"
 
-void Map::load(const std::string& filename, unsigned int width, 
+void Map::depthFirstSearch(std::vector<TileType>& whiteList, sf::Vector2i pos, int label, int regionType = 0)
+{
+	if (pos.x < 0 || pos.x >= m_width) return;
+	if (pos.y < 0 || pos.y >= m_height) return;
+
+	if (m_tiles[pos.y * m_width + pos.x].m_regions[regionType] != 0) return;
+
+	bool found{ false };
+
+	for (auto type : whiteList)
+	{
+		if (type == m_tiles[pos.y * m_width + pos.x].m_tileType)
+		{
+			found = true;
+			break;
+		}
+	}
+
+	if (!found) return;
+
+	m_tiles[pos.y * m_width + pos.x].m_regions[regionType] = label;
+
+	depthFirstSearch(whiteList, pos + sf::Vector2i(-1, 0), label, regionType);
+	depthFirstSearch(whiteList, pos + sf::Vector2i(0, 1), label, regionType);
+	depthFirstSearch(whiteList, pos + sf::Vector2i(1, 0), label, regionType);
+	depthFirstSearch(whiteList, pos + sf::Vector2i(0, -1), label, regionType);
+}
+
+void Map::load(const std::string& filename, unsigned int width,
 	unsigned int height, std::map<std::string, Tile>& tileAtals)
 {
 	std::ifstream inputFile;
@@ -111,37 +139,22 @@ void Map::updateDirection(TileType tileType)
 
 			// Check for adjacent tiles of the same type
 			if (x > 0 && y > 0)
-			{
 				adjacentTiles[0][0] = (m_tiles[(y - 1) * m_width + (x - 1)].m_tileType == tileType);
-			}
 			if (y > 0)
-			{
 				adjacentTiles[0][1] = (m_tiles[(y - 1) * m_width + (x)].m_tileType == tileType);
-			}
 			if (x < m_width - 1 && y > 0)
-			{
 				adjacentTiles[0][2] = (m_tiles[(y - 1) * m_width + (x + 1)].m_tileType == tileType);
-			}
 			if (x > 0)
-			{
 				adjacentTiles[1][0] = (m_tiles[(y)*m_width + (x - 1)].m_tileType == tileType);
-			}
 			if (x < m_width - 1)
-			{
 				adjacentTiles[1][2] = (m_tiles[(y)*m_width + (x + 1)].m_tileType == tileType);
-			}
 			if (x > 0 && y < m_height - 1)
-			{
 				adjacentTiles[2][0] = (m_tiles[(y + 1) * m_width + (x - 1)].m_tileType == tileType);
-			}
 			if (y < m_height - 1)
-			{
 				adjacentTiles[2][1] = (m_tiles[(y + 1) * m_width + (x)].m_tileType == tileType);
-			}
 			if (x < m_width - 1 && y < m_height - 1)
-			{
 				adjacentTiles[2][2] = (m_tiles[(y + 1) * m_width + (x + 1)].m_tileType == tileType);
-			}
+
 
 			if (adjacentTiles[1][0] && adjacentTiles[1][2] && adjacentTiles[0][1] && adjacentTiles[2][1])
 				m_tiles[pos].m_tileVariant = 2;

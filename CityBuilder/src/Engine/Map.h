@@ -8,7 +8,7 @@
 class Map
 {
 private:
-	void depthFirstSearch(std::vector<TileType>& whiteList, sf::Vector2f pos, int label, int type);
+	void depthFirstSearch(std::vector<TileType>& whiteList, sf::Vector2i pos, int label, int regionType = 0);
 public:
 	unsigned int m_width;
 	unsigned int m_height;
