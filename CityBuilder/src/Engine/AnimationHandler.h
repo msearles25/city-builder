@@ -37,7 +37,7 @@ public:
 	void update(const float dt);
 
 	// Change the animation, resetting it in the process
-	void changeAnim(unsigned int animNum);
+	void changeAnim(unsigned int animID);
 
 	// Current section that should be displayed
 	sf::IntRect m_bounds;

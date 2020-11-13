@@ -2,6 +2,7 @@
 
 void AnimationHandler::addAnim(Animation& anim)
 {
+	m_animations.push_back(anim);
 }
 
 void AnimationHandler::update(const float dt)
@@ -36,8 +37,19 @@ void AnimationHandler::update(const float dt)
 	}
 }
 
-void AnimationHandler::changeAnim(unsigned int animNum)
+void AnimationHandler::changeAnim(unsigned int animID)
 {
+	// Do not change the animation if it is currently active or the new anim doesnt exist
+	if (m_currentAnim == animID || animID >= m_animations.size())
+		return;
+
+	// Set current anim
+	m_currentAnim = animID;
+	// update the anims bounds
+	sf::IntRect rect{ m_frameSize };
+	rect.top = rect.height * animID;
+	m_bounds = rect;
+	m_t = 0.f;
 }
 
 AnimationHandler::AnimationHandler()
