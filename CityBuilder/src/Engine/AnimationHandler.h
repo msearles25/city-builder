@@ -22,5 +22,28 @@ public:
 
 class AnimationHandler
 {
+private:
+	std::vector<Animation> m_animations;
+	float m_t;
+	int m_currentAnim;
+public:
+	// Add an animation
+	void addAnim(Animation& anim);
 
+	/*
+	Update the current frame of animation. dt is the time since the update was last called
+	(The time for one frame to be executed)
+	*/
+	void update(const float dt);
+
+	// Change the animation, resetting it in the process
+	void changeAnim(unsigned int animNum);
+
+	// Current section that should be displayed
+	sf::IntRect bounds;
+
+	// Pixel dimensions of each frame
+	sf::IntRect frameSize;
+
+	AnimationHandler(const sf::IntRect& frameSize);
 };
