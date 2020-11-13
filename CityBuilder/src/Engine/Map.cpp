@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <fstream>
 #include<map>
 #include<string>
@@ -58,14 +59,14 @@ void Map::select(sf::Vector2i start, sf::Vector2i end, std::vector<TileType> bla
 			If it is then mark it as invalid, otherwise select it
 			*/
 			m_selected[y * m_width + x] = 1;
-			++m_numSelected;
+			++m_numTilesSelected;
 
 			for (auto type : blackList)
 			{
 				if (m_tiles[y * m_width + x].m_tileType == type)
 				{
 					m_selected[y * m_width + x] = 2;
-					--m_numSelected;
+					--m_numTilesSelected;
 					break;
 				}
 			}
@@ -77,7 +78,7 @@ void Map::clearSelected()
 {
 	for (auto& tile : m_selected) tile = 0;
 
-	m_numSelected = 0;
+	m_numTilesSelected = 0;
 }
 
 void Map::load(const std::string& filename, unsigned int width,
@@ -92,6 +93,7 @@ void Map::load(const std::string& filename, unsigned int width,
 	for (int pos{ 0 }; pos < width * height; ++pos)
 	{
 		m_resources.push_back(255);
+		m_selected.push_back(0);
 
 		TileType tileType;
 		inputFile.read((char*)&tileType, sizeof(int));
@@ -263,7 +265,7 @@ void Map::updateDirection(TileType tileType)
 
 Map::Map()
 {
-	m_numSelected = 0;
+	m_numTilesSelected = 0;
 	m_tileSize = 8;
 	m_width = 0;
 	m_height = 0;
@@ -272,7 +274,7 @@ Map::Map()
 
 Map::Map(const std::string& filename, unsigned int width, unsigned int height, std::map<std::string, Tile>& tileAtlas)
 {
-	m_numSelected = 0;
+	m_numTilesSelected = 0;
 	m_tileSize = 8;
 	load(filename, width, height, tileAtlas);
 }

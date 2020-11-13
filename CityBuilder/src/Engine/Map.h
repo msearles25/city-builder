@@ -24,7 +24,7 @@ public:
 
 	// 0 = deselected, 1 = selected, 2 = invalid
 	std::vector<char> m_selected;
-	unsigned int m_numSelected;
+	unsigned int m_numTilesSelected;
 
 	// Select tiles within a cetainb bounds
 	void select(sf::Vector2i start, sf::Vector2i end, std::vector<TileType> blackList);

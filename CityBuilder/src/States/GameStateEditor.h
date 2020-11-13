@@ -6,7 +6,8 @@
 enum class ActionState
 {
 	NONE,
-	PANNING
+	PANNING,
+	SELECTING
 };
 
 class GameStateEditor : public GameState
@@ -21,6 +22,11 @@ private:
 
 	sf::Vector2i panningAnchor;
 	float zoomLevel;
+
+	sf::Vector2i selectionStart;
+	sf::Vector2i selectionEnd;
+
+	Tile* currentTile;
 public:
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
