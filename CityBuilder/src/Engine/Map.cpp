@@ -33,6 +33,53 @@ void Map::depthFirstSearch(std::vector<TileType>& whiteList, sf::Vector2i pos, i
 	depthFirstSearch(whiteList, pos + sf::Vector2i(0, -1), label, regionType);
 }
 
+void Map::select(sf::Vector2i start, sf::Vector2i end, std::vector<TileType> blackList)
+{
+	// swap coords if necessary
+	if (end.y < start.y) std::swap(start.y, end.y);
+	if (end.x < start.x) std::swap(start.x, end.x);
+
+	// Clamp a range
+	if (end.x >= m_width) end.x = m_width - 1;
+	else if (end.x < 0) end.x = 0;
+	if (end.y >= m_height) end.y = m_height - 1;
+	else if (end.y < 0) end.y = 0;
+	if (start.x >= m_width) start.x = m_width - 1;
+	else if (start.x < 0) start.x = 0;
+	if (start.y >= m_height) start.y = m_height - 1;
+	else if (start.y < 0) start.y = 0;
+
+	for (int y{ start.y }; y < end.y; ++y)
+	{
+		for (int x{ start.x }; x < end.x; ++x)
+		{
+			/*
+			Check if the tile type is in the blacklist. 
+			If it is then mark it as invalid, otherwise select it
+			*/
+			m_selected[y * m_width + x] = 1;
+			++m_numSelected;
+
+			for (auto type : blackList)
+			{
+				if (m_tiles[y * m_width + x].m_tileType == type)
+				{
+					m_selected[y * m_width + x] = 2;
+					--m_numSelected;
+					break;
+				}
+			}
+		}
+	}
+}
+
+void Map::clearSelected()
+{
+	for (auto& tile : m_selected) tile = 0;
+
+	m_numSelected = 0;
+}
+
 void Map::load(const std::string& filename, unsigned int width,
 	unsigned int height, std::map<std::string, Tile>& tileAtals)
 {
@@ -216,6 +263,7 @@ void Map::updateDirection(TileType tileType)
 
 Map::Map()
 {
+	m_numSelected = 0;
 	m_tileSize = 8;
 	m_width = 0;
 	m_height = 0;
@@ -224,6 +272,7 @@ Map::Map()
 
 Map::Map(const std::string& filename, unsigned int width, unsigned int height, std::map<std::string, Tile>& tileAtlas)
 {
+	m_numSelected = 0;
 	m_tileSize = 8;
 	load(filename, width, height, tileAtlas);
 }

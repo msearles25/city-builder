@@ -34,6 +34,8 @@ void GameStateEditor::handleInput()
 			m_game->background.setScale(
 				float(event.size.width) / float(m_game->background.getTexture()->getSize().x),
 				float(event.size.height) / float(m_game->background.getTexture()->getSize().y));
+			m_gameView.setSize(event.size.width, event.size.height);
+			m_gameView.zoom(zoomLevel);
 			break;
 		case sf::Event::MouseMoved:
 			// Pan the camera

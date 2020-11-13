@@ -22,6 +22,16 @@ public:
 	unsigned int m_numSelected;
 	unsigned int m_numRegions[1];
 
+	// 0 = deselected, 1 = selected, 2 = invalid
+	std::vector<char> m_selected;
+	unsigned int m_numSelected;
+
+	// Select tiles within a cetainb bounds
+	void select(sf::Vector2i start, sf::Vector2i end, std::vector<TileType> blackList);
+
+	// Deselect all the tiles
+	void clearSelected();
+
 	// Load the map from disk
 	void load(const std::string& filename, unsigned int width, 
 		unsigned int height, std::map<std::string, Tile>& tileAtals);
