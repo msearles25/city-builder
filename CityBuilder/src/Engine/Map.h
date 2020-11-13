@@ -10,17 +10,17 @@ class Map
 private:
 	void depthFirstSearch(std::vector<TileType>& whiteList, sf::Vector2f pos, int label, int type);
 public:
-	unsigned int width;
-	unsigned int height;
+	unsigned int m_width;
+	unsigned int m_height;
 
-	std::vector<Tile> tiles;
+	std::vector<Tile> m_tiles;
 
 	// Resource map
-	std::vector<int> resources;
+	std::vector<int> m_resources;
 
-	unsigned int tileSize;
-	unsigned int numSelected;
-	unsigned int numRegions[1];
+	unsigned int m_tileSize;
+	unsigned int m_numSelected;
+	unsigned int m_numRegions[1];
 
 	// Load the map from disk
 	void load(const std::string& filename, unsigned int width, 
