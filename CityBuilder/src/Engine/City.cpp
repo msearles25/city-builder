@@ -92,10 +92,35 @@ void City::load(std::string cityName, std::map<std::string, Tile>& tileAtlas)
 			}
 		}
 	}
+
+	inputFile.close();
+
+	map.load(cityName + "_map.dat", width, height, tileAtlas);
+	tileChanged();
 }
 
 void City::save(std::string cityName)
 {
+	std::ofstream outputFile(cityName + "_cfg.dat", std::ios::out);
+
+	outputFile << "width=" << map.m_width << '\n';
+	outputFile << "height=" << map.m_height<< '\n';
+	outputFile << "day=" << day << '\n';
+	outputFile << "populationPool=" << populationPool << '\n';
+	outputFile << "employmentPool=" << employmentPool << '\n';
+	outputFile << "population=" << population << '\n';
+	outputFile << "employable=" << employable << '\n';
+	outputFile << "birthRate=" << birthRate << '\n';
+	outputFile << "deathRate=" << deathRate << '\n';
+	outputFile << "residentialTax=" << residentialTax << '\n';
+	outputFile << "commercialTax=" << commercialTax << '\n';
+	outputFile << "industrialTax=" << industrialTax << '\n';
+	outputFile << "funds=" << funds << '\n';
+	outputFile << "earnings=" << earnings << '\n';
+
+	outputFile.close();
+
+	map.save(cityName + "_map.dat");
 }
 
 void City::update(float dt)
