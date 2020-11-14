@@ -3,6 +3,7 @@
 #include<map>
 #include<string>
 #include <vector>
+
 #include "Map.h"
 #include "Tile.h"
 
@@ -50,9 +51,9 @@ void Map::select(sf::Vector2i start, sf::Vector2i end, std::vector<TileType> bla
 	if (start.y >= m_height) start.y = m_height - 1;
 	else if (start.y < 0) start.y = 0;
 
-	for (int y{ start.y }; y < end.y; ++y)
+	for (int y{ start.y }; y <= end.y; ++y)
 	{
-		for (int x{ start.x }; x < end.x; ++x)
+		for (int x{ start.x }; x <= end.x; ++x)
 		{
 			/*
 			Check if the tile type is in the blacklist. 
@@ -165,6 +166,11 @@ void Map::draw(sf::RenderWindow& window, float dt)
 			pos.y = (x + y) * m_tileSize * 0.5;
 			m_tiles[y * m_width + x].m_sprite.setPosition(pos);
 
+			if (m_selected[y * m_width + x])
+				m_tiles[y * m_width + x].m_sprite.setColor(sf::Color(0x7d, 0x7d, 0x7d));
+			else
+				m_tiles[y * m_width + x].m_sprite.setColor(sf::Color(0xff, 0xff, 0xff));
+
 			m_tiles[y * m_width + x].draw(window, dt);
 		}
 	}
@@ -218,9 +224,9 @@ void Map::updateDirection(TileType tileType)
 			if (x < m_width - 1 && y > 0)
 				adjacentTiles[0][2] = (m_tiles[(y - 1) * m_width + (x + 1)].m_tileType == tileType);
 			if (x > 0)
-				adjacentTiles[1][0] = (m_tiles[(y)*m_width + (x - 1)].m_tileType == tileType);
+				adjacentTiles[1][0] = (m_tiles[(y)  *m_width + (x - 1)].m_tileType == tileType);
 			if (x < m_width - 1)
-				adjacentTiles[1][2] = (m_tiles[(y)*m_width + (x + 1)].m_tileType == tileType);
+				adjacentTiles[1][2] = (m_tiles[(y) * m_width + (x + 1)].m_tileType == tileType);
 			if (x > 0 && y < m_height - 1)
 				adjacentTiles[2][0] = (m_tiles[(y + 1) * m_width + (x - 1)].m_tileType == tileType);
 			if (y < m_height - 1)

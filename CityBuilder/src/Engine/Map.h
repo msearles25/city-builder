@@ -19,7 +19,6 @@ public:
 	std::vector<int> m_resources;
 
 	unsigned int m_tileSize;
-	unsigned int m_numSelected;
 	unsigned int m_numRegions[1];
 
 	// 0 = deselected, 1 = selected, 2 = invalid

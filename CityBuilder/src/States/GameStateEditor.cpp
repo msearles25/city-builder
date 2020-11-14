@@ -47,15 +47,10 @@ void GameStateEditor::handleInput()
 			}
 			else if (actionState == ActionState::SELECTING)
 			{
-				sf::Vector2f pos{m_game->window.mapPixelToCoords(
-						sf::Mouse::getPosition(m_game->window),
-						m_gameView) };
+				sf::Vector2f pos{m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_gameView) };
 				
-				selectionEnd.x = pos.y / (map.m_tileSize) + pos.x / (2 * map.m_tileSize) -
-					map.m_width * 0.5f - 0.5f;
-
-				selectionEnd.y = pos.y / (map.m_tileSize) - pos.x / (2 * map.m_tileSize) -
-					map.m_width * 0.5f + 0.5f;
+				selectionEnd.x = pos.y / (map.m_tileSize) + pos.x / (2 * map.m_tileSize) - map.m_width * 0.5f - 0.5f;
+				selectionEnd.y = pos.y / (map.m_tileSize) - pos.x / (2 * map.m_tileSize) + map.m_width * 0.5f + 0.5f;
 
 				map.clearSelected();
 
@@ -91,14 +86,11 @@ void GameStateEditor::handleInput()
 				if (actionState != ActionState::SELECTING)
 				{
 					actionState = ActionState::SELECTING;
-					sf::Vector2f pos{ m_game->window.mapPixelToCoords(
-						sf::Mouse::getPosition(m_game->window), m_gameView) };
+					sf::Vector2f pos{ m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_gameView) };
 
-					selectionEnd.x = pos.y / (map.m_tileSize) + pos.x / (2 * map.m_tileSize) -
-						map.m_width * 0.5f - 0.5f;
+					selectionStart.x = pos.y / (map.m_tileSize) + pos.x / (2 * map.m_tileSize) - map.m_width * 0.5f - 0.5f;
 
-					selectionEnd.y = pos.y / (map.m_tileSize) - pos.x / (2 * map.m_tileSize) -
-						map.m_width * 0.5f + 0.5f;
+					selectionStart.y = pos.y / (map.m_tileSize) - pos.x / (2 * map.m_tileSize) + map.m_width * 0.5f + 0.5f;
 				}
 			}
 			else if (event.mouseButton.button == sf::Mouse::Right)
