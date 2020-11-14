@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <numeric>
 #include <sstream>
 #include <vector>
 #include "City.h"
@@ -90,11 +91,24 @@ void City::bulldoze(const Tile& tile)
 
 void City::shuffleTiles()
 {
+	while (shuffledTiles.size() < map.m_tiles.size())
+	{
+		shuffledTiles.push_back(0);
+	}
 
+	std::iota(shuffledTiles.begin(), shuffledTiles.end(), 1);
+
+	std::random_shuffle(shuffledTiles.begin(), shuffledTiles.end());
 }
 
 void City::tileChanged()
 {
+	map.updateDirection(TileType::ROAD);
+	map.findConnectedRegions(
+		{
+			TileType::ROAD, TileType::RESIDENTIAL,
+			TileType::COMMERCIAL, TileType::INDUSTRIAL
+		}, 0);
 }
 
 double City::getHomeless()
