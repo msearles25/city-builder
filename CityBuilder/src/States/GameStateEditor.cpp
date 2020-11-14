@@ -37,6 +37,9 @@ void GameStateEditor::handleInput()
 {
 	sf::Event event;
 
+	sf::Vector2f guiPos{ m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_guiView) };
+	sf::Vector2f gamePos{ m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_gameView) };
+
 	while (m_game->window.pollEvent(event))
 	{
 		switch (event.type)
@@ -85,12 +88,34 @@ void GameStateEditor::handleInput()
 							TileType::INDUSTRIAL
 						});
 				}
+
+				guiSystem.at("selectionText").setEntryText(0, "$" +
+					std::to_string(currentTile->m_cost * city.map.m_numTilesSelected));
+				
+				if (city.funds <= city.map.m_numTilesSelected * currentTile->m_cost)
+				{
+					guiSystem.at("selectionCostText").highlight(0);
+				}
+				else
+				{
+					guiSystem.at("selectionCostText").highlight(-1);
+				}
+
+				guiSystem.at("selectionCostText").setPosition(guiPos + sf::Vector2f(16, -16));
+
+				guiSystem.at("selectionCostText").show();
+
+				// highlight entries
+				guiSystem.at("rightClickMenu").highlight(guiSystem.at("rightClickMenu").getEntry(guiPos));
 			}
 			break;
 		case sf::Event::MouseButtonPressed:
 			// start panning
 			if (event.mouseButton.button == sf::Mouse::Middle)
 			{
+				guiSystem.at("rightClickMenu").hide();
+				guiSystem.at("selectionCostText").hide();
+
 				if (actionState != ActionState::PANNING)
 				{
 					actionState = ActionState::PANNING;
@@ -99,15 +124,25 @@ void GameStateEditor::handleInput()
 			}
 			else if (event.mouseButton.button == sf::Mouse::Left)
 			{
-				// select a map tile
-				if (actionState != ActionState::SELECTING)
+				if (guiSystem.at("rightClickMenu").m_visible == true)
 				{
-					actionState = ActionState::SELECTING;
-					sf::Vector2f pos{ m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_gameView) };
+					std::string msg{ guiSystem.at("rightClickMenu").activate(guiPos) };
+					if (msg != "null") currentTile = &m_game->tileAtlas.at(msg);
 
-					selectionStart.x = pos.y / (city.map.m_tileSize) + pos.x / (2 * city.map.m_tileSize) - city.map.m_width * 0.5f - 0.5f;
+					guiSystem.at("rightClickMenu").hide();
+				}
+				else
+				{
+					// select a map tile
+					if (actionState != ActionState::SELECTING)
+					{
+						actionState = ActionState::SELECTING;
+						sf::Vector2f pos{ m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_gameView) };
 
-					selectionStart.y = pos.y / (city.map.m_tileSize) - pos.x / (2 * city.map.m_tileSize) + city.map.m_width * 0.5f + 0.5f;
+						selectionStart.x = pos.y / (city.map.m_tileSize) + pos.x / (2 * city.map.m_tileSize) - city.map.m_width * 0.5f - 0.5f;
+
+						selectionStart.y = pos.y / (city.map.m_tileSize) - pos.x / (2 * city.map.m_tileSize) + city.map.m_width * 0.5f + 0.5f;
+					}
 				}
 			}
 			else if (event.mouseButton.button == sf::Mouse::Right)
@@ -117,6 +152,24 @@ void GameStateEditor::handleInput()
 				{
 					actionState = ActionState::NONE;
 					city.map.clearSelected();
+				}
+				else
+				{
+					// Open tile select menu
+					sf::Vector2f pos{ guiPos };
+
+					if (pos.x > m_game->window.getSize().x - guiSystem.at("rightClickMenu").getSize().x)
+					{
+						pos -= sf::Vector2f(guiSystem.at("rightClickMenu").getSize().x, 0);
+					}
+
+					if (pos.y > m_game->window.getSize().y - guiSystem.at("rightClickMenu").getSize().y)
+					{
+						pos -= sf::Vector2f(0, guiSystem.at("rightClickMenu").getSize().y);
+					}
+
+					guiSystem.at("rightClickMenu").setPosition(pos);
+					guiSystem.at("righClickMenu").show();
 				}
 			}
 			break;
