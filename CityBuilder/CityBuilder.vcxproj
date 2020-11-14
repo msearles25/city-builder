@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\GUI.cpp" />
     <ClCompile Include="src\Engine\Map.cpp" />
     <ClCompile Include="src\Engine\AnimationHandler.cpp" />
     <ClCompile Include="src\States\GameStateEditor.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="src\Engine\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\GUI.h" />
     <ClInclude Include="src\Engine\Map.h" />
     <ClInclude Include="src\Engine\AnimationHandler.h" />
     <ClInclude Include="src\States\GameStateEditor.h" />

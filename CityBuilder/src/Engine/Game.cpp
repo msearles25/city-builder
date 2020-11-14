@@ -51,13 +51,6 @@ void Game::loadTiles()
 
 void Game::loadStyleSheets()
 {
-	sf::Font font;
-	font.loadFromFile("media/font.ttf");
-	m_fonts["main_font"] = font;
-}
-
-void Game::loadFonts()
-{
 	m_styleSheets["button"] = GuiStyle(&m_fonts.at("main_font"), 1,
 		sf::Color(0xc6, 0xc6, 0xc6),
 		sf::Color(0x94, 0x94, 0x94),
@@ -73,6 +66,13 @@ void Game::loadFonts()
 		sf::Color(0x00, 0x00, 0x00, 0x00),
 		sf::Color(0x00, 0x00, 0x00),
 		sf::Color(0x00, 0x00, 0x00));
+}
+
+void Game::loadFonts()
+{
+	sf::Font font;
+	font.loadFromFile("media/font.ttf");
+	m_fonts["main_font"] = font;
 }
 
 void Game::pushState(GameState* state)
@@ -124,6 +124,8 @@ Game::Game()
 {
 	loadTexture();
 	loadTiles();
+	loadFonts();
+	loadStyleSheets();
 
 	window.create(sf::VideoMode(800, 600), "City Builder");
 	window.setFramerateLimit(60);

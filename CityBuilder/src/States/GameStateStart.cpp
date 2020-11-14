@@ -1,3 +1,4 @@
+#include <utility>
 #include "../Engine/GameState.h"
 #include "GameStateEditor.h"
 #include "GameStateStart.h"
@@ -13,6 +14,8 @@ void GameStateStart::draw(const float dt)
 
 	m_game->window.clear(sf::Color::Black);
 	m_game->window.draw(m_game->background);
+
+	for (auto gui : guiSystem) m_game->window.draw(gui.second);
 }
 
 void GameStateStart::update(const float dt)
@@ -61,4 +64,11 @@ GameStateStart::GameStateStart(Game* game)
 	pos *= 0.5f;
 
 	m_view.setCenter(pos);
+
+	guiSystem.emplace("menu", GUI(sf::Vector2f(192, 32), 4, false, game->m_styleSheets.at("button"),
+		{ std::make_pair("Load Game", "load_game") }));
+
+	guiSystem.at("menu").setPosition(pos);
+	guiSystem.at("menu").setOrigin(96, 32 * 1 / 2);
+	guiSystem.at("menu").show();
 }
