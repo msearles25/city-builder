@@ -132,10 +132,12 @@ void GUI::highlight(const int entry)
 
 std::string GUI::activate(const int entry)
 {
-	return std::string();
+	if (entry == -1) return "null";
+	return m_entries[entry].m_message;
 }
 
 std::string GUI::activate(const sf::Vector2f mousePos)
 {
-	return std::string();
+	int entry{ getEntry(mousePos) };
+	return activate(entry);
 }
