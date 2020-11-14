@@ -51,4 +51,6 @@ public:
 	void shuffleTiles();
 	void tileChanged();
 
+	double getHomeless();
+	double getUnemployed();
 };
