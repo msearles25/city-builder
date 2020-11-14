@@ -66,10 +66,31 @@ void City::update(float dt)
 
 void City::bulldoze(const Tile& tile)
 {
+	for (int pos{ 0 }; pos < map.m_width * map.m_height; ++pos)
+	{
+		if (map.m_selected[pos] == 1)
+		{
+			if (map.m_tiles[pos].m_tileType == TileType::RESIDENTIAL)
+			{
+				populationPool += map.m_tiles[pos].m_population;
+			}
+			else if (map.m_tiles[pos].m_tileType == TileType::COMMERCIAL)
+			{
+				employmentPool += map.m_tiles[pos].m_population;
+			}
+			else if (map.m_tiles[pos].m_tileType == TileType::INDUSTRIAL)
+			{
+				employmentPool += map.m_tiles[pos].m_population;
+			}
+
+			map.m_tiles[pos] = tile;
+		}
+	}
 }
 
 void City::shuffleTiles()
 {
+
 }
 
 void City::tileChanged()
