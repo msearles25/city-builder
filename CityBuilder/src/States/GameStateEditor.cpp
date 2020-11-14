@@ -13,7 +13,21 @@ void GameStateEditor::draw(const float dt)
 
 void GameStateEditor::update(const float dt)
 {
+	city.update(dt);
 
+	// update the infobar
+	
+	guiSystem.at("infobar").setEntryText(0, "Day " + std::to_string(city.day));
+	guiSystem.at("infobar").setEntryText(1, "&" + std::to_string(long(city.funds)));
+	guiSystem.at("infobar").setEntryText(2, std::to_string(long(city.population)) +
+		" (" + std::to_string(long(city.getHomeless())) + ")");
+	guiSystem.at("infobar").setEntryText(3, std::to_string(long(city.employable)) + " (" +
+		std::to_string(long(city.getUnemployed())) + ")");
+	guiSystem.at("infobar").setEntryText(4, tileTypeToStr(currentTile->m_tileType));
+
+	// Highlight entries of the right click menu
+	guiSystem.at("rightClickMenu").highlight(guiSystem.at("rightClickMenu")
+		.getEntry(m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_guiView)));
 }
 
 void GameStateEditor::handleInput()
