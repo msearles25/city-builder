@@ -55,6 +55,43 @@ City::City()
 
 void City::load(std::string cityName, std::map<std::string, Tile>& tileAtlas)
 {
+	int width = 0;
+	int height = 0;
+
+	std::ifstream inputFile(cityName + "_cfg.dat", std::ios::in);
+	std::string line;
+
+	while (std::getline(inputFile, line))
+	{
+		std::istringstream lineStream(line);
+		std::string key;
+
+		if (std::getline(lineStream, key, '='))
+		{
+			std::string value;
+			if (std::getline(lineStream, value))
+			{
+				if (key == "width") width = std::stoi(value);
+				else if (key == "height") height = std::stoi(value);
+				else if (key == "day") day = std::stoi(value);
+				else if (key == "populationPool") populationPool = std::stod(value);
+				else if (key == "employmentPool") employmentPool = std::stod(value);
+				else if (key == "population") population = std::stod(value);
+				else if (key == "employable") employable = std::stod(value);
+				else if (key == "birthRate") birthRate = std::stod(value);
+				else if (key == "deathRate") deathRate = std::stod(value);
+				else if (key == "residentialTax") residentialTax = std::stod(value);
+				else if (key == "commercialTax") commercialTax = std::stod(value);
+				else if (key == "industrialTax") industrialTax = std::stod(value);
+				else if (key == "funds") funds = std::stod(value);
+				else if (key == "earnings") earnings = std::stod(value);
+			}
+			else
+			{
+				std::cerr << "Error, value for key " << key << '\n';
+			}
+		}
+	}
 }
 
 void City::save(std::string cityName)
