@@ -20,13 +20,13 @@ void GameStateEditor::update(const float dt)
 
 	// update the infobar
 	
-	guiSystem.at("infobar").setEntryText(0, "Day " + std::to_string(city.day));
-	guiSystem.at("infobar").setEntryText(1, "&" + std::to_string(long(city.funds)));
-	guiSystem.at("infobar").setEntryText(2, std::to_string(long(city.population)) +
+	guiSystem.at("infoBar").setEntryText(0, "Day " + std::to_string(city.day));
+	guiSystem.at("infoBar").setEntryText(1, "$" + std::to_string(long(city.funds)));
+	guiSystem.at("infoBar").setEntryText(2, std::to_string(long(city.population)) +
 		" (" + std::to_string(long(city.getHomeless())) + ")");
-	guiSystem.at("infobar").setEntryText(3, std::to_string(long(city.employable)) + " (" +
+	guiSystem.at("infoBar").setEntryText(3, std::to_string(long(city.employable)) + " (" +
 		std::to_string(long(city.getUnemployed())) + ")");
-	guiSystem.at("infobar").setEntryText(4, tileTypeToStr(currentTile->m_tileType));
+	guiSystem.at("infoBar").setEntryText(4, tileTypeToStr(currentTile->m_tileType));
 
 	// Highlight entries of the right click menu
 	guiSystem.at("rightClickMenu").highlight(guiSystem.at("rightClickMenu")
@@ -98,7 +98,7 @@ void GameStateEditor::handleInput()
 						});
 				}
 
-				guiSystem.at("selectionText").setEntryText(0, "$" +
+				guiSystem.at("selectionCostText").setEntryText(0, "$" +
 					std::to_string(currentTile->m_cost * city.map.m_numTilesSelected));
 				
 				if (city.funds <= city.map.m_numTilesSelected * currentTile->m_cost)
@@ -178,7 +178,7 @@ void GameStateEditor::handleInput()
 					}
 
 					guiSystem.at("rightClickMenu").setPosition(pos);
-					guiSystem.at("righClickMenu").show();
+					guiSystem.at("rightClickMenu").show();
 				}
 			}
 			break;
@@ -243,7 +243,7 @@ GameStateEditor::GameStateEditor(Game* game)
 	m_gameView.setCenter(pos);
 
 	//map = Map("city_map.dat", 64, 64, game->tileAtlas);
-	city = City("city", game->tileSize, game->tileAtlas);
+	city = City("city", m_game->tileSize, m_game->tileAtlas);
 	city.shuffleTiles();
 
 	guiSystem.emplace("rightClickMenu",
@@ -272,7 +272,7 @@ GameStateEditor::GameStateEditor(Game* game)
 			}));
 
 	guiSystem.at("infoBar").setPosition(sf::Vector2f(0, game->window.getSize().y - 16));
-	guiSystem.at("infobar").show();
+	guiSystem.at("infoBar").show();
 
 	zoomLevel = 1.0f;
 

@@ -301,7 +301,7 @@ void City::shuffleTiles()
 		shuffledTiles.push_back(0);
 	}
 
-	std::iota(shuffledTiles.begin(), shuffledTiles.end(), 1);
+	std::iota(shuffledTiles.begin() + 1, shuffledTiles.end(), 1);
 
 	std::random_shuffle(shuffledTiles.begin(), shuffledTiles.end());
 }
