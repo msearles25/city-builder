@@ -1,6 +1,6 @@
 A City builder simulation game made with sfml/c++.
 
-![Alt Text](https://i.imgur.com/CioNTZ3.mp4)
+![Alt Text](https://github.com/msearles25/city-builder/blob/main/citybuilder.gif)
 
 # How to compile
 
