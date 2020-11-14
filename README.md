@@ -1,5 +1,7 @@
 A City builder simulation game made with sfml/c++.
 
+![Alt Text](https://i.imgur.com/CioNTZ3.mp4)
+
 # How to compile
 
 ### Visual Studio 
