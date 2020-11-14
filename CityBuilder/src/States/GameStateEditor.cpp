@@ -8,7 +8,7 @@ void GameStateEditor::draw(const float dt)
 	m_game->window.draw(m_game->background);
 
 	m_game->window.setView(m_gameView);
-	map.draw(m_game->window, dt);
+	city.map.draw(m_game->window, dt);
 }
 
 void GameStateEditor::update(const float dt)
@@ -49,18 +49,18 @@ void GameStateEditor::handleInput()
 			{
 				sf::Vector2f pos{m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_gameView) };
 				
-				selectionEnd.x = pos.y / (map.m_tileSize) + pos.x / (2 * map.m_tileSize) - map.m_width * 0.5f - 0.5f;
-				selectionEnd.y = pos.y / (map.m_tileSize) - pos.x / (2 * map.m_tileSize) + map.m_width * 0.5f + 0.5f;
+				selectionEnd.x = pos.y / (city.map.m_tileSize) + pos.x / (2 * city.map.m_tileSize) - city.map.m_width * 0.5f - 0.5f;
+				selectionEnd.y = pos.y / (city.map.m_tileSize) - pos.x / (2 * city.map.m_tileSize) + city.map.m_width * 0.5f + 0.5f;
 
-				map.clearSelected();
+				city.map.clearSelected();
 
 				if (currentTile->m_tileType == TileType::GRASS)
 				{
-					map.select(selectionStart, selectionEnd, { currentTile->m_tileType, TileType::WATER });
+					city.map.select(selectionStart, selectionEnd, { currentTile->m_tileType, TileType::WATER });
 				}
 				else
 				{
-					map.select(selectionStart, selectionEnd,
+					city.map.select(selectionStart, selectionEnd,
 						{
 							currentTile->m_tileType, TileType::FOREST,
 							TileType::WATER, TileType::ROAD,
@@ -88,9 +88,9 @@ void GameStateEditor::handleInput()
 					actionState = ActionState::SELECTING;
 					sf::Vector2f pos{ m_game->window.mapPixelToCoords(sf::Mouse::getPosition(m_game->window), m_gameView) };
 
-					selectionStart.x = pos.y / (map.m_tileSize) + pos.x / (2 * map.m_tileSize) - map.m_width * 0.5f - 0.5f;
+					selectionStart.x = pos.y / (city.map.m_tileSize) + pos.x / (2 * city.map.m_tileSize) - city.map.m_width * 0.5f - 0.5f;
 
-					selectionStart.y = pos.y / (map.m_tileSize) - pos.x / (2 * map.m_tileSize) + map.m_width * 0.5f + 0.5f;
+					selectionStart.y = pos.y / (city.map.m_tileSize) - pos.x / (2 * city.map.m_tileSize) + city.map.m_width * 0.5f + 0.5f;
 				}
 			}
 			else if (event.mouseButton.button == sf::Mouse::Right)
@@ -99,7 +99,7 @@ void GameStateEditor::handleInput()
 				if (actionState == ActionState::SELECTING)
 				{
 					actionState = ActionState::NONE;
-					map.clearSelected();
+					city.map.clearSelected();
 				}
 			}
 			break;
@@ -113,7 +113,7 @@ void GameStateEditor::handleInput()
 				if (actionState == ActionState::SELECTING)
 				{
 					actionState = ActionState::NONE;
-					map.clearSelected();
+					city.map.clearSelected();
 				}
 			}
 			break;
@@ -150,13 +150,43 @@ GameStateEditor::GameStateEditor(Game* game)
 	m_guiView.setCenter(pos);
 	m_gameView.setCenter(pos);
 
-	map = Map("city_map.dat", 64, 64, game->tileAtlas);
+	//map = Map("city_map.dat", 64, 64, game->tileAtlas);
+	city = City("city", game->tileSize, game->tileAtlas);
+	city.shuffleTiles();
+
+	guiSystem.emplace("rightClickMenu",
+		GUI(sf::Vector2f(196, 16), 2, false, game->m_styleSheets.at("button"),
+			{
+					std::make_pair("Flatten $" + game->tileAtlas["grass"].getCost(), "grass"),
+					std::make_pair("Forest $" + game->tileAtlas["forest"].getCost(), "forest"),
+					std::make_pair("Residential zone $" + game->tileAtlas["residential"].getCost(), "residential"),
+					std::make_pair("Commercial zone $" + game->tileAtlas["commercial"].getCost(), "commercial"),
+					std::make_pair("Industrial zone $" + game->tileAtlas["industrial"].getCost(), "industrial"),
+					std::make_pair("Road $" + game->tileAtlas["road"].getCost(), "road")
+
+			}));
+
+	guiSystem.emplace("selectionCostText",
+		GUI(sf::Vector2f(196, 16), 0, false, game->m_styleSheets.at("text"), { std::make_pair("","") }));
+
+	guiSystem.emplace("infoBar",
+		GUI(sf::Vector2f(game->window.getSize().x / 5, 16), 2, true, game->m_styleSheets.at("button"),
+			{
+				std::make_pair("time", "time"),
+				std::make_pair("funds", "funds"),
+				std::make_pair("population", "population"),
+				std::make_pair("employment", "employment"),
+				std::make_pair("current tile", "tile")
+			}));
+
+	guiSystem.at("infoBar").setPosition(sf::Vector2f(0, game->window.getSize().y - 16));
+	guiSystem.at("infobar").show();
 
 	zoomLevel = 1.0f;
 
 	// Center the camera on the map
-	sf::Vector2f center(map.m_width, map.m_height * 0.5f);
-	center *= float(map.m_tileSize);
+	sf::Vector2f center(city.map.m_width, city.map.m_height * 0.5f);
+	center *= float(city.map.m_tileSize);
 	m_gameView.setCenter(center);
 
 	selectionStart = sf::Vector2i(0, 0);
