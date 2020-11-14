@@ -3,6 +3,7 @@
 #include <stack>
 #include <string>
 #include <SFML/Graphics.hpp>
+#include "GUI.h"
 #include "TextureManager.h"
 #include "Tile.h"
 
@@ -13,6 +14,8 @@ class Game
 private:
 	void loadTexture();
 	void loadTiles();
+	void loadStyleSheets();
+	void loadFonts();
 public:
 	const static int tileSize{ 8 };
 
@@ -23,6 +26,8 @@ public:
 	sf::Sprite background;
 
 	std::map<std::string, Tile> tileAtlas;
+	std::map<std::string, GuiStyle> m_styleSheets;
+	std::map<std::string, sf::Font> m_fonts;
 
 	void pushState(GameState* state);
 	void popState();

@@ -49,6 +49,32 @@ void Game::loadTiles()
 		TileType::ROAD, 100, 0, 1);
 }
 
+void Game::loadStyleSheets()
+{
+	sf::Font font;
+	font.loadFromFile("media/font.ttf");
+	m_fonts["main_font"] = font;
+}
+
+void Game::loadFonts()
+{
+	m_styleSheets["button"] = GuiStyle(&m_fonts.at("main_font"), 1,
+		sf::Color(0xc6, 0xc6, 0xc6),
+		sf::Color(0x94, 0x94, 0x94),
+		sf::Color(0x00, 0x00, 0x00),
+		sf::Color(0x61, 0x61, 0x61),
+		sf::Color(0x94, 0x94, 0x94),
+		sf::Color(0x00, 0x00, 0x00));
+
+	m_styleSheets["text"] = GuiStyle(&m_fonts.at("main_font"), 0,
+		sf::Color(0x00, 0x00, 0x00, 0x00),
+		sf::Color(0x00, 0x00, 0x00),
+		sf::Color(0xff, 0xff, 0xff),
+		sf::Color(0x00, 0x00, 0x00, 0x00),
+		sf::Color(0x00, 0x00, 0x00),
+		sf::Color(0x00, 0x00, 0x00));
+}
+
 void Game::pushState(GameState* state)
 {
 	states.push(state);
