@@ -182,6 +182,19 @@ void GameStateEditor::handleInput()
 			{
 				if (actionState == ActionState::SELECTING)
 				{
+					if (currentTile != nullptr)
+					{
+						unsigned int cost{ currentTile->m_cost * city.map.m_numTilesSelected };
+
+						if (city.funds >= cost)
+						{
+							city.bulldoze(*currentTile);
+							city.funds -= currentTile->m_cost * city.map.m_numTilesSelected;
+
+							city.tileChanged();
+						}
+					}
+					guiSystem.at("rightClickMenu").hide();
 					actionState = ActionState::NONE;
 					city.map.clearSelected();
 				}
