@@ -50,6 +50,15 @@ void GameStateEditor::handleInput()
 		case sf::Event::Resized:
 			m_gameView.setSize(event.size.width, event.size.height);
 			m_guiView.setSize(event.size.width, event.size.height);
+
+			guiSystem.at("infoBar").setDimensions(
+				sf::Vector2f(event.size.width / guiSystem.at("infoBar").m_entries.size(), 16));
+
+			guiSystem.at("infoBar").setPosition(m_game->window.mapPixelToCoords(
+				sf::Vector2i(0, event.size.height - 16), m_guiView));
+
+			guiSystem.at("infoBar").show();
+
 			m_game->background.setPosition(m_game->window.mapPixelToCoords(sf::Vector2i(0, 0), m_guiView));
 			m_game->background.setScale(
 				float(event.size.width) / float(m_game->background.getTexture()->getSize().x),

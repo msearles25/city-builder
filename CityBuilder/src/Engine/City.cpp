@@ -252,7 +252,7 @@ void City::update(float dt)
 	popTotal += populationPool;
 
 	// Adjust employment pool
-	float newWorkers{ (popTotal - population) * propCanWork };	
+	float newWorkers{ float((popTotal - population) * propCanWork) };	
 	newWorkers *= newWorkers < 0 ? -1 : 1;
 
 	employmentPool += newWorkers;
