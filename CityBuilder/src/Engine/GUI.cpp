@@ -113,6 +113,21 @@ void GUI::hide()
 
 void GUI::highlight(const int entry)
 {
+	for (int i{ 0 }; i < m_entries.size(); ++i)
+	{
+		if (i == entry)
+		{
+			m_entries[i].m_shape.setFillColor(m_style.m_bodyHighlightCol);
+			m_entries[i].m_shape.setOutlineColor(m_style.m_borderHighlightCol);
+			m_entries[i].m_text.setColor(m_style.m_textHightlightCol);
+		}
+		else
+		{
+			m_entries[i].m_shape.setFillColor(m_style.m_bodyCol);
+			m_entries[i].m_shape.setOutlineColor(m_style.m_borderCol);
+			m_entries[i].m_text.setColor(m_style.m_textCol);
+		}
+	}
 }
 
 std::string GUI::activate(const int entry)
