@@ -73,7 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\bin\$(Platform)$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\intermediate\$(Platform)$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)\intermediates\$(Platform)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\City.cpp" />
     <ClCompile Include="src\Engine\GUI.cpp" />
     <ClCompile Include="src\Engine\Map.cpp" />
     <ClCompile Include="src\Engine\AnimationHandler.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="src\Engine\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\City.h" />
     <ClInclude Include="src\Engine\GUI.h" />
     <ClInclude Include="src\Engine\Map.h" />
     <ClInclude Include="src\Engine\AnimationHandler.h" />
