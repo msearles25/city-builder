@@ -9,6 +9,9 @@ void GameStateEditor::draw(const float dt)
 
 	m_game->window.setView(m_gameView);
 	city.map.draw(m_game->window, dt);
+
+	m_game->window.setView(m_guiView);
+	for (auto gui : guiSystem) m_game->window.draw(gui.second);
 }
 
 void GameStateEditor::update(const float dt)
