@@ -86,10 +86,29 @@ void GUI::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void GUI::show()
 {
+	sf::Vector2f offset(0.f, 0.f);
+
+	m_visible = true;
+
+	for (auto& entry : m_entries)
+	{
+		sf::Vector2f origin{ getOrigin() };
+		origin -= offset;
+		entry.m_shape.setOrigin(origin);
+		entry.m_text.setOrigin(origin);
+
+		entry.m_shape.setPosition(getPosition());
+		entry.m_text.setPosition(getPosition());
+
+		if (m_horizontal) offset.x += m_dimensions.x;
+
+		else offset.y += m_dimensions.y;
+	}
 }
 
 void GUI::hide()
 {
+	m_visible = false;
 }
 
 void GUI::highlight(const int entry)
