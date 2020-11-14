@@ -1,15 +1,14 @@
-﻿  GUI.cpp
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\GUI.cpp(25,59): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+﻿  GameStateStart.cpp
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateStart.cpp(45,47): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateStart.cpp(45,29): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateStart.cpp(48,63): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\GUI.cpp(41,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\GUI.cpp(59,12): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\GUI.cpp(71,69): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\States\GameStateStart.cpp(48,45): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\fuck micro$hit\source\repos\CityBuilder\CityBuilder\src\Engine\GUI.cpp(116,21): warning C4018: '<': signed/unsigned mismatch
   CityBuilder.vcxproj -> C:\Users\fuck micro$hit\source\repos\CityBuilder\\bin\Win32Debug\CityBuilder.exe
