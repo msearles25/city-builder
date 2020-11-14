@@ -56,14 +56,32 @@ int GUI::getEntry(const sf::Vector2f mousePos)
 
 void GUI::setEntryText(int entry, std::string text)
 {
+	if (entry >= m_entries.size() || entry < 0) return;
+	
+	m_entries[entry].m_text.setString(text);
 }
 
 void GUI::setDimensions(sf::Vector2f dimensions)
 {
+	m_dimensions = dimensions;
+
+	for (auto& entry : m_entries)
+	{
+		entry.m_shape.setSize(m_dimensions);
+		entry.m_text.setCharacterSize(dimensions.y - m_style.m_borderSize - m_padding);
+	}
 }
 
 void GUI::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	if (!m_visible) return;
+
+	// Draw each entry in the menu
+	for (auto entry : m_entries)
+	{
+		target.draw(entry.m_shape);
+		target.draw(entry.m_text);
+	}
 }
 
 void GUI::show()
